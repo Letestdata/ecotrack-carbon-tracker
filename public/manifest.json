@@ -1,0 +1,18 @@
+{
+  "name": "EcoTrack – Carbon Footprint Tracker",
+  "short_name": "EcoTrack",
+  "description": "Track and reduce your carbon footprint with personalized AI-driven insights.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f9fafb",
+  "theme_color": "#16a34a",
+  "icons": [
+    {
+      "src": "/og-image.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["environment", "health", "lifestyle"],
+  "lang": "en"
+}

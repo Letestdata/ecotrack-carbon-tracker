@@ -1,0 +1,73 @@
+/* ============================================================
+   EcoTrack – Global Styles
+   ============================================================ */
+
+@import "tailwindcss";
+
+/* ── Custom font ──────────────────────────────────────────── */
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Focus ring improvement ───────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid #16a34a;
+  outline-offset: 2px;
+}
+
+/* ── Scrollbar hide utility ───────────────────────────────── */
+
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Smooth scrolling ─────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Bounce animation delay fix ──────────────────────────── */
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+/* ── Reduce motion support ────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Print styles ─────────────────────────────────────────── */
+
+@media print {
+  nav {
+    display: none !important;
+  }
+  .md\:ml-64 {
+    margin-left: 0 !important;
+  }
+}

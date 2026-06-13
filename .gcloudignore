@@ -1,0 +1,18 @@
+# ============================================================
+# Google Cloud – Files to ignore during deployment
+# ============================================================
+
+.gcloudignore
+.git
+.gitignore
+node_modules/
+src/
+public/
+*.md
+*.yaml.example
+.env*
+.eslintrc*
+.prettierrc*
+tsconfig*.json
+vite.config.*
+coverage/

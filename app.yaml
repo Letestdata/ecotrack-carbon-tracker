@@ -1,0 +1,44 @@
+# ============================================================
+# Google Cloud App Engine Configuration
+# EcoTrack – Carbon Footprint Tracker
+# Deploy: gcloud app deploy
+# ============================================================
+
+runtime: nodejs20
+env: standard
+
+# Serve the built React app as static files
+handlers:
+  # Serve static assets (JS, CSS, images) with long cache
+  - url: /assets
+    static_dir: dist/assets
+    http_headers:
+      Cache-Control: "public, max-age=31536000, immutable"
+      X-Content-Type-Options: nosniff
+
+  # Serve other static files at root
+  - url: /(.+\.(ico|png|svg|json|txt|webmanifest))$
+    static_files: dist/\1
+    upload: dist/(.+\.(ico|png|svg|json|txt|webmanifest))$
+    http_headers:
+      Cache-Control: "public, max-age=86400"
+
+  # Fallback: serve index.html for all routes (SPA routing)
+  - url: /.*
+    static_files: dist/index.html
+    upload: dist/index.html
+    http_headers:
+      Cache-Control: "no-cache, no-store, must-revalidate"
+      X-Content-Type-Options: nosniff
+      X-Frame-Options: DENY
+      X-XSS-Protection: "1; mode=block"
+      Referrer-Policy: strict-origin-when-cross-origin
+      Permissions-Policy: "geolocation=(), microphone=(), camera=()"
+
+automatic_scaling:
+  min_instances: 0
+  max_instances: 5
+  target_cpu_utilization: 0.65
+
+env_variables:
+  NODE_ENV: production
