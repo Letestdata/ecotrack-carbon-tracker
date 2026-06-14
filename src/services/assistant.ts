@@ -93,9 +93,7 @@ function getMonthTotal(logs: DailyLog[]): number {
 function randomTip(category?: Category): string {
   const pool = category ? ECO_TIPS.filter((t) => t.category === category) : ECO_TIPS;
   const tip = pool[Math.floor(Math.random() * pool.length)];
-  return tip
-    ? `${tip.icon} **${tip.title}**: ${tip.description} *(saves ~${tip.potentialSaving} kg CO₂e/month)*`
-    : 'Keep tracking your activities for personalised tips! 🌱';
+  return `${tip.icon} **${tip.title}**: ${tip.description} *(saves ~${tip.potentialSaving} kg CO₂e/month)*`;
 }
 
 // ── Main response function ────────────────────────────────────
@@ -315,7 +313,7 @@ export function generateAssistantResponse(
                   .flatMap((l) => l.entries)
                   .filter((e) => e.category === cat);
                 const total = catLogs.reduce((s, e) => s + e.co2e, 0);
-                const pct = monthTotal > 0 ? ((total / monthTotal) * 100).toFixed(0) : '0';
+                const pct = ((total / monthTotal) * 100).toFixed(0);
                 return `• **${cat.charAt(0).toUpperCase() + cat.slice(1)}:** ${total.toFixed(1)} kg (${pct}%)`;
               })
               .join('\n')

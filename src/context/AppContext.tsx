@@ -22,7 +22,7 @@ import { ACHIEVEMENTS } from '../data/achievements';
 
 // ── State ────────────────────────────────────────────────────
 
-interface AppState {
+export interface AppState {
   profile: UserProfile;
   logs: DailyLog[];
   chatHistory: ChatMessage[];
@@ -32,7 +32,7 @@ interface AppState {
 
 // ── Actions ──────────────────────────────────────────────────
 
-type Action =
+export type Action =
   | { type: 'SET_PAGE'; payload: NavPage }
   | { type: 'UPDATE_PROFILE'; payload: Partial<UserProfile> }
   | { type: 'ADD_ENTRY'; payload: ActivityEntry }
@@ -52,7 +52,7 @@ const DEFAULT_PROFILE: UserProfile = {
   joinedAt: new Date().toISOString(),
 };
 
-const INITIAL_STATE: AppState = {
+export const INITIAL_STATE: AppState = {
   profile: DEFAULT_PROFILE,
   logs: [],
   chatHistory: [],
@@ -66,7 +66,7 @@ function findOrCreateLog(logs: DailyLog[], date: string): DailyLog {
   return logs.find((l) => l.date === date) ?? { date, totalCo2e: 0, entries: [] };
 }
 
-function reducer(state: AppState, action: Action): AppState {
+export function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case 'LOAD_STATE':
       return action.payload;
@@ -222,7 +222,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       .filter((l) => l.date.startsWith(month))
       .forEach((log) =>
         log.entries.forEach((e) => {
-          base[e.category] = (base[e.category] ?? 0) + e.co2e;
+          base[e.category] = base[e.category] + e.co2e;
         })
       );
     return base;

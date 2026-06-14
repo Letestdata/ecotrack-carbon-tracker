@@ -56,7 +56,7 @@ export function getCategoryBreakdown(
     .filter((l) => l.date.startsWith(yearMonth))
     .forEach((l) =>
       l.entries.forEach((e) => {
-        base[e.category] = round((base[e.category] ?? 0) + e.co2e, 2);
+        base[e.category] = round(base[e.category] + e.co2e, 2);
       })
     );
   return base;
